@@ -13,6 +13,16 @@ html,body ,#root{
   width: 100%;
   background: rgb(20, 20, 20);
 }
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+}
+nav h1, ul li a{
+  color: white;
+}
+
 .main{
   height: 100%;
   width: 100%;

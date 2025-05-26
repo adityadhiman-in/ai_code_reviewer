@@ -23,6 +23,18 @@ function App() {
 
   return (
     <>
+      <nav>
+        <div className="logo">
+          <h1>AI Code Reviewer</h1>
+        </div>
+        <div className="menu">
+          <ul>
+            <li>
+              <a href="/"> Home</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <main className="main">
         <div className="left">
           <div className="code">
