@@ -27,12 +27,8 @@ function App() {
         <div className="logo">
           <h1>AI Code Reviewer</h1>
         </div>
-        <div className="menu">
-          <ul>
-            <li>
-              <a href="/"> Home</a>
-            </li>
-          </ul>
+        <div className="tagline">
+          <p>Welocome, Here is your AI Code Reviewer to Help You!</p>
         </div>
       </nav>
       <main className="main">

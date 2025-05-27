@@ -19,7 +19,7 @@ nav{
   justify-content: space-between;
   padding: 2rem;
 }
-nav h1, ul li a{
+nav h1, .tagline{
   color: white;
 }
 
