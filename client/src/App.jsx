@@ -7,6 +7,8 @@ import Markdown from "react-markdown";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [code, setCode] = useState(`Enter Your Code Here`);
   const [review, setReview] = useState(``);
 
@@ -15,10 +17,18 @@ function App() {
   });
 
   const reviewCode = async () => {
-    const response = await axios.post("http://localhost:3000/ai/get-review", {
-      code,
-    });
-    setReview(response.data);
+    try {
+      setIsLoading(true);
+      const response = await axios.post("http://localhost:3000/ai/get-review", {
+        code,
+      });
+      setReview(response.data);
+    } catch (error) {
+      console.error("Error reviewing code:", error);
+      setReview("Something went wrong while reviewing your code.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -50,7 +60,9 @@ function App() {
               }}
             />
           </div>
-          <button onClick={reviewCode}>Review Code</button>
+          <button onClick={reviewCode} disabled={isLoading}>
+            {isLoading ? "Reviewing..." : "Review Code"}
+          </button>
         </div>
         <div className="right">
           <Markdown>{review}</Markdown>
