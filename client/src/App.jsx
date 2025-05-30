@@ -1,20 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "prismjs/themes/prism-tomorrow.css";
-import prism from "prismjs";
+import Prism from "prismjs";
+import "prismjs/components/prism-javascript"; // Required for highlighting
 import Editor from "react-simple-code-editor";
 import axios from "axios";
 import Markdown from "react-markdown";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
   const [code, setCode] = useState(`Enter Your Code Here`);
   const [review, setReview] = useState(``);
-
-  useEffect(() => {
-    prism.highlightAll();
-  });
 
   const reviewCode = async () => {
     try {
@@ -22,7 +17,7 @@ function App() {
       const response = await axios.post("http://localhost:3000/ai/get-review", {
         code,
       });
-      setReview(response.data);
+      setReview(response.data.review || response.data); // Adjust if your API structure is different
     } catch (error) {
       console.error("Error reviewing code:", error);
       setReview("Something went wrong while reviewing your code.");
@@ -38,25 +33,28 @@ function App() {
           <h1>AI Code Reviewer</h1>
         </div>
         <div className="tagline">
-          <p>Welocome, Here is your AI Code Reviewer to Help You!</p>
+          <p>Welcome, Here is your AI Code Reviewer to Help You!</p>
         </div>
       </nav>
-      <main className="main">
-        <div className="left">
+      <main className="main" style={{ display: "flex" }}>
+        <div className="left" style={{ flex: 1, padding: "1rem" }}>
           <div className="code">
             <Editor
               value={code}
               onValueChange={(code) => setCode(code)}
               highlight={(code) =>
-                prism.highlight(code, prism.languages.javascript, "javascript")
+                Prism.highlight(code, Prism.languages.javascript, "javascript")
               }
               padding={20}
               style={{
                 fontFamily: '"Fira code", monospace',
                 fontSize: 18,
-                height: "100%",
-                width: "100%",
                 color: "white",
+                height: "500px",
+                width: "100%",
+                overflowY: "auto",
+                backgroundColor: "#2d2d2d",
+                borderRadius: "8px",
               }}
             />
           </div>
@@ -64,7 +62,7 @@ function App() {
             {isLoading ? "Reviewing..." : "Review Code"}
           </button>
         </div>
-        <div className="right">
+        <div className="right" style={{ flex: 1, padding: "1rem" }}>
           <Markdown>{review}</Markdown>
         </div>
       </main>
