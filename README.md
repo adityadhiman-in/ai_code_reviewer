@@ -1,6 +1,6 @@
 # 🤖 AI Code Reviewer
 
-![alt text](image2.png)
+![alt text](image-1.png)
 
 **AI Code Reviewer** is an intelligent MERN stack-based application (without a database) that allows developers to submit code snippets and receive:
 
@@ -36,6 +36,7 @@ This tool leverages the **Gemini API (Google's GenAI model)** to review your cod
 ## 📸 Screenshots
 
 ![alt text](image.png)
+![alt text](image-2.png)
 
 ---
 
